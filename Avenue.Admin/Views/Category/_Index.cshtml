@@ -1,0 +1,20 @@
+﻿@model System.Collections.Generic.IEnumerable<Avenue.DTO.CategoryDto>
+
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <tr id="@item.Id">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+<img src="@Url.Content(item.Icon)" width="25" height="25"/>        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-primary  btn-sm  fa fa-pencil-square-o", @title = "", @data_toggle = "tooltip", @data_title = " ویرایش" })
+            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger  btn-sm  fa fa-trash-o delete", @title = "", @data_toggle = "tooltip", @data_title = "حذف" })
+        </td>
+    </tr>
+}
+

@@ -1,0 +1,258 @@
+﻿@model Avenue.DTO.ServicePhotoDto
+@{
+    ViewBag.Title = "PhotoMangment";
+}
+<style>
+    .closes {
+        cursor: pointer;
+        padding: 3px;
+        border-radius: 126px;
+        position: absolute;
+        right: 1px;
+        bottom: 103px;
+        color: red;
+    }
+
+    .spans {
+        position: relative;
+    }
+
+    #list span {
+        position: relative;
+    }
+</style>
+
+<div class="content-wrapper">
+    <h3>
+        ویرایش
+        <small>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <ol class="breadcrumb">
+                        <li>
+                            @Html.ActionLink("لیست", "Index")
+                        </li>
+                        <li class="active">
+                            <strong>ویرایش</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-sm-8">
+                    <div class="title-action">
+                        @Html.ActionLink("بازگشت به لیست", "Index", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </small>
+    </h3>
+    <div class="panel panel-default">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+
+            <!-- Tab panes-->
+            <div id="home" role="tabpanel" class="tab-pane active">
+
+                @using (Html.BeginForm("PhotoMangment", "WeddingVenues", FormMethod.Post, new { enctype = "multipart/form-data", id = "fileupload" }))
+            {
+                    @Html.AntiForgeryToken()
+                   @*@Html.HiddenFor(x => x.WeddingVenuesId, new { id = "WeddingVenuesId" })*@
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-horizontal">
+                            <fieldset class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">تصاویر</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" multiple="multiple" name="photos" id="photos" data-classbutton="btn btn-default" data-classinput="form-control inline" class="form-control filestyle" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="col-md-12">
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <output id="list"></output>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="button" id="formSubmit" value="ذخیره" class="btn btn-primary start" />
+                                    @Html.ActionLink("انصراف", "Index", null, new { @class = "btn btn-white" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                }
+
+            <br/>
+            <br/>
+            <br/>
+
+            </div>@Html.Action("PhotoList", "WeddingVenues")
+
+
+        </div>
+    </div>
+</div>
+@section Styles {
+    @Styles.Render("~/bundles/fileUploadCss")
+
+
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryValidate")
+    @Scripts.Render("~/bundles/filestyle")
+    <script>
+        //photo upload
+        var images = [];
+        $('#formSubmit')
+            .on('click',
+                function () {
+                    $.ajax({
+                        url: '@Url.Action("PhotoMangment","WeddingVenues")',
+                        type: "POST",
+                        //************************************
+                        data:  JSON.stringify(images),
+                        //************************************
+                        contentType: "application/json",
+                        success: function (retUrl) {
+                            location.replace(retUrl);
+                        }
+                    });
+                });
+        $("#photos")
+            .change(function (e) {
+                e.preventDefault();
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+                    var formData = new FormData();
+                    var totalFiles = document.getElementById("photos").files.length;
+                    debugger;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("photos").files[i];
+                        var ext = $('#photos').val().split('.').pop().toLowerCase();
+                        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                            alert('فرمت فایل نامعتبر میباشد');
+                            $('#photos').val('');
+                            return null;
+                        }
+                        formData.append("photos", file);
+                    }
+
+                    function resize(file) {
+                        var perferedWidth = 2700;
+                        var ratio = perferedWidth / file.width;
+                        var canvas = $("<canvas>")[0];
+                        canvas.width = file.width * ratio;
+                        canvas.height = file.height * ratio;
+                        var ctx = canvas.getContext("2d");
+                        ctx.drawImage(file, 0, 0, canvas.width, canvas.height);
+                        //////////4. export as dataUrl
+                        return canvas.toDataURL();
+
+                    }
+
+                    debugger;
+
+                    $.ajax({
+                        url: '@Url.Action("UploadImage", "WeddingVenues")',
+                        type: "POST",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (result) {
+
+                            $.each(result.Files,
+                                function (index, item) {
+                                    var image = {
+                                        ImageUrl: item.ImageUrl,
+                                        TumbImageUrl: item.TumbImageUrl,
+                                        Name: item.Name,
+                                        WeddingVenuesId:"@Model.WeddingVenuesId"
+                                    }
+                                   
+                                    var img = $('<img />',
+                                    {
+                                        id: item.Name,
+                                        src: item.TumbImageUrl,
+                                        alt: 'MyAlt',
+                                        width: '120',
+                                        height: '120'
+                                    });
+                                    var td = $('<tr>',
+                                        {
+                                            id: 'td' + index
+                                        })
+                                        .addClass('col-md-3');
+                                    td.appendTo($('#list'));
+
+                                    img.appendTo(td);
+                                   
+
+                                    var span = $('<img />',
+                                        {
+                                            src: "../../Images/cancel.png",
+                                            width: 33,
+                                            height: 27,
+                                            text: 'X'
+
+                                        })
+                                        .addClass("col-md-3 closes");
+                                    span.appendTo(td);
+                                    images.push(image);
+                                });
+
+                        },
+                        error: function (err) {
+                            alert("حجم فایل بسیار زیاد است");
+                        }
+                    });
+
+                } else {
+                    alert("FormData is not supported.");
+                }
+                $("#photos").val(' ');
+
+            });
+
+        //delete Image Preview
+        $("#list")
+            .on('click',
+                '.closes',
+                function (e) {
+                    $(this).closest('tr').remove();
+
+                    e.preventDefault();
+                    debugger;
+                    var data = $(this).siblings().attr('id');
+                    var thumb = $(this).siblings().attr('src');
+                    $.ajax({
+                        url: "@Url.Action("DeleteFilePreview", "WeddingVenues")",
+                        data: { fileName: data, fileTumb: thumb },
+                        ContentType: 'application/json',
+                        dateType:'json',
+                        Type: 'get',
+                        success: function (data) {
+                            $('#close').closest('tr').remove();
+
+
+                        }
+                    });
+
+                });
+
+        function DeleteImg(name) {
+            alert(name);
+        };
+    </script>
+}

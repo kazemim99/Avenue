@@ -1,0 +1,24 @@
+﻿@model System.Collections.Generic.IEnumerable<Avenue.ViewModels.CatetoryAvenueTypeVm>
+
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <tr id="@item.AvenueTypeId">
+        <td>
+            @Html.DisplayFor(modelItem => item.AvenuTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.AvenueTypeId }, new { @class = "btn btn-primary btn-icon btn-sm tip fa fa-pencil-square-o", @title = "", @data_toggle = "tooltip", @data_title = " ویرایش" })
+            @Html.ActionLink(" ", "Delete", new { id = item.AvenueTypeId }, new { @class = "btn btn-danger btn-icon btn-sm tip fa fa-trash-o", @title = "", @data_toggle = "tooltip", @data_title = "حذف" })
+
+
+        </td>
+    </tr>
+}
+
+

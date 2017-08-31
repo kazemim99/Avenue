@@ -1,0 +1,97 @@
+﻿@model ViewModels.MetricUnitindexViewModel
+
+@{
+    ViewBag.Title = "لیست واحد";
+}
+
+<div class="tab-spinner">
+    <div class="panel-body loader-demo">
+        <div class="ball-grid-pulse">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<h2>
+    @ViewBag.Title
+</h2>
+<div class="container-fluid">
+    <!-- START DATATABLE 1 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="navigation-menu">
+                        <span>مسیر شما در پنل: <a href="/MetricUnits/index">@ViewBag.Title</a></span>
+                    </div>
+                    <a id="btnsave" href="/MetricUnits/Create" class="btn btn-success m-t-10">
+                        افزودن<em class="fa fa-plus fa-fw"></em>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    نام
+                                </th>
+                                <th>عملیات</th>
+                            </tr>
+
+                            @foreach (var item in Model.MetricUnitItemIndexViewModels)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink(" ", "Edit", new { id = item.MetricUnitId }, new { @class = "btn btn-primary btn-icon btn-xs tip fa fa-pencil-square-o", @title = "", @data_toggle = "tooltip", @data_title = " ویرایش" })|
+                                 
+                                    @Html.ActionLink(" ", "Delete", new { id = item.MetricUnitId }, new { @class = "btn  btn-danger btn-icon btn-xs tip fa fa-trash-o", @title = "", @data_toggle = "tooltip", @data_title = " حذف" })
+                                   
+                                </td>
+                            </tr>
+                            }
+
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <input type="text" placeholder="جستجو" class="input-sm form-control" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-default">جستجو</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8"></div>
+                            <div class="col-lg-2">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END DATATABLE 1 -->
+</div>
+
+
+@section Styles {
+
+}
+@section Scripts {
+
+}
+

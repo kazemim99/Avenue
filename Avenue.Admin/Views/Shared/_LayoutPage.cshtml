@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Bootstrap Admin App + jQuery">
+    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+    <title>سانازسانیا | @ViewBag.title</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <!--++++++++++++++++++++++++ SCRIPTS Validate +++++++++++++++++++++++++-->
+
+    @Scripts.Render("~/bundles/ajax-jquary")
+    @Styles.Render("~/bundles/fontawesome")
+    @Styles.Render("~/bundles/simpleLineIcons")
+    
+    <!-- =============== PAGE VENDOR STYLES =============== -->
+    @Styles.Render("~/bundles/custom-style")
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    <link href="@Styles.Url("~/Content/app/css/bootstrap-rtl.css")" rel="stylesheet" type="text/css" id="bscss" />
+    <!-- =============== APP STYLES ===============-->
+    <link href="@Styles.Url("~/Content/app/css/IRANSans.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/app/css/app-rtl.css")" rel="stylesheet" type="text/css" id="maincss" />
+    @Styles.Render("~/bundles/Spinkit")
+    @Styles.Render("~/bundles/LoadersCss")
+</head>
+
+<body>
+    <div class="wrapper">
+        @RenderBody()
+    </div>
+    <div class="p-lg text-center">
+        <span>&copy;</span>
+        <span>2016</span>
+        <span>-</span>
+        <span>Angle</span>
+        <br>
+        <span>Bootstrap Admin Template</span>
+    </div>
+
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/matchMedia")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/storage")
+    @Scripts.Render("~/bundles/jqueryEasing")
+    @Scripts.Render("~/bundles/animo")
+    @Scripts.Render("~/bundles/slimscroll")
+    @Scripts.Render("~/bundles/screenfull")
+    @Scripts.Render("~/bundles/localize")
+    @Scripts.Render("~/bundles/demoRTL")
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    @RenderSection("scripts", required: false)
+    <!-- =============== APP SCRIPTS ===============-->
+    @Scripts.Render("~/bundles/Angle")
+
+    <!--++++++++++++++++++++++++ SCRIPTS Validate +++++++++++++++++++++++++-->
+    @Scripts.Render("~/bundles/validate-jquary")
+
+</body>
+
+</html>

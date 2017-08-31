@@ -1,0 +1,385 @@
+﻿
+@model Avenue.DTO.WeddingVenuesDto
+
+@{
+    ViewBag.Title = "افزودن";
+}
+
+<div class="content-wrapper">
+    <h3>
+        ویرایش
+        <small>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <ol class="breadcrumb">
+                        <li>
+                            @Html.ActionLink("لیست", "Index")
+                        </li>
+                        <li class="active">
+                            <strong>ویرایش</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-sm-8">
+                    <div class="title-action">
+                        @Html.ActionLink("بازگشت به لیست", "Index", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </small>
+    </h3>
+    <div class="panel panel-default">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+
+            @using (Html.BeginForm("Edit", "WeddingVenues", FormMethod.Post, new { enctype = "multipart/form-data", id = "fileupload" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.Lat, new { id = "Lat" })
+                @Html.HiddenFor(x => x.Lng, new { id = "Lng" })
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x=>x.RowVersion)
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+
+
+
+
+                    <fieldset class="col-md-12">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new {@class = "col-sm-2 control-label"})
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.Name, new {@class = "form-control", required = "required"})
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryId, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(x => x.CategoryId, (IEnumerable<SelectListItem>)ViewBag.categoryParenId, "لطفا دسته را انتخاب نمایید", new { @class = "form-control", required = "required", id = "CategoryId" })
+                                @Html.ValidationMessageFor(model => model.CategoryId)
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.CategoryId, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(x => x.CategoryId, (IEnumerable<SelectListItem>)ViewBag.ChildId, "لطفا دسته را انتخاب نمایید", new { @class = "form-control", id = "ChildId" })
+                                @Html.ValidationMessageFor(x => x.CategoryId)
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StateId, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(x => x.StateId, (IEnumerable<SelectListItem>)ViewBag.States, "لطفا استان را انتخاب نمایید", new { @class = "form-control", id = "StateId", required = "required" })
+                                @Html.ValidationMessageFor(model => model.StateId)
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CityId, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.CityId, (IEnumerable<SelectListItem>)ViewBag.Cities, "انتخاب منطقه...", new { @class = "form-control", id = "CityId", required = "required" })
+                                @Html.ValidationMessageFor(model => model.CityId)
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="row">
+                        <fieldset class="col-md-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Address, new { @class = "col-sm-2 control-label" })
+                                <div class="col-md-6">
+                                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Address)
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset class="col-md-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Tel, new { @class = "col-sm-2 control-label" })
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.Tel, new { @class = "form-control integer", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Tel)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MinCapacity, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.MinCapacity, new { @class = "form-control integer" })
+                                @Html.ValidationMessageFor(model => model.MinCapacity)
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaxCapacity, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.MaxCapacity, new { @class = "form-control integer" })
+                                @Html.ValidationMessageFor(model => model.MaxCapacity)
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @*<fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">تصاویر</label>
+                            <div class="col-sm-10">
+                                <input type="file" multiple="multiple" name="photos" id="photos" data-classbutton="btn btn-default" data-classinput="form-control inline" class="form-control filestyle" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+                            </div>
+                        </div>
+                    </fieldset>*@
+
+
+
+                    <fieldset class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Videos, new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-6">
+                                <input type="file" name="Videos" data-classbutton="btn btn-default" data-classinput="form-control inline" class="form-control filestyle" />
+                                @Html.ValidationMessageFor(model => model.Videos)
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="col-md-12">
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <output id="list"></output>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @*<fieldset class="col-md-12">
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.Action("PhotoList","WeddingVenues",new {id=Model.Id})
+                            </div>
+                    </div>
+                </fieldset>*@
+                <fieldset class="col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WebSite, new { @class = "col-sm-2 control-label" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.WebSite, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WebSite)
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, new { @class = "col-sm-2 control-label" })
+
+                        <label class="checkbox c-checkbox c-checkbox-rounded">
+                            <input id="roundedcheckbox10" type="checkbox" name="Status">
+                            <span class="fa fa-check"></span>
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset class="col-md-10">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, new { @class = "col-sm-2 control-label" })
+
+                        <div class="">
+                            @Html.TextAreaFor(model => model.Description, 10, 10, new { @class = "form-control note-editor", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Description)
+
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="col-md-12">
+
+                    <div class="form-group">
+                        موقعیت
+
+                        <div class="col-md-12">
+                            <div id="map" style="width: 100%; height: 500px;"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ذخیره" class="btn btn-primary start" />
+                        @Html.ActionLink("انصراف", "Index", null, new { @class = "btn btn-white" })
+                    </div>
+                </div>
+            </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Styles {
+    @Styles.Render("~/bundles/fileUploadCss")
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryValidate")
+    @Scripts.Render("~/bundles/filestyle")
+
+
+    <script>
+
+        //Prevent Enter Letter
+        $(".integer").keypress(function (evt) {
+            if (evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+            }
+        });
+
+
+        //Preview Image Upload
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+
+            // Loop through the FileList and render image files as thumbnails.
+            for (var i = 0, f; f = files[i]; i++) {
+
+                // Only process image files.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var span = document.createElement('span');
+                        span.innerHTML = ['<img width="120px" height="120px" style="margin:10px" class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+                        document.getElementById('list').insertBefore(span, null);
+                    };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }
+        }
+
+        document.getElementById('photos').addEventListener('change', handleFileSelect, false);
+
+
+        $("#StateId")
+            .change(function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: "@Url.Action("CityList", "WeddingVenues")",
+                    data: { id: id },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data) {
+                        $('#CityId').get(0).options.length = 0;
+                        //$('#CityId').get(0).options[0] = new Option("Please Select One", "-1");
+                        $.each(data,
+                            function (index, item) {
+                                $('#CityId').get(0).options[$('#CityId').get(0).options.length] = new
+                                    Option(item.Name, item.Id);
+                            });
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            });
+        $("#CategoryId")
+            .change(function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: "@Url.Action("AvneuTypeList", "WeddingVenues")",
+                    data: { id: id },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data) {
+                        $('#ServiceTypeId').get(0).options.length = 0;
+                        //$('#ServiceTypeId').get(0).options[0] = new Option("Please Select One", "-1");
+                        $.each(data,
+                            function (index, item) {
+                                $('#ServiceTypeId').get(0).options[$('#ServiceTypeId').get(0).options.length] = new
+                                    Option(item.Name, item.Id);
+                            });
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            });
+
+        function myMap() {
+            var mapCanvas = document.getElementById("map");
+            var myCenter = new google.maps.LatLng("@Model.Lat", "@Model.Lng");
+            var mapOptions = { center: myCenter, zoom: 12 };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({ position: myCenter });
+            marker.setMap(map);
+
+            google.maps.event.addListener(map,
+                'click',
+                function (event) {
+                    placeMarker(map, event.latLng);
+                });
+        }
+
+        function placeMarker(map, location) {
+            var marker = '';
+            marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Latitude: ' + location.lat() + '<br>Guiditude: ' + location.lng()
+            });
+            infowindow.open(map, marker);
+            $("#Lat").val(location.lat());
+            $("#Lng").val(location.lng());
+
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5m9PNvVblmP9V8yx3PN9eAsEalGKVGFQ&callback=myMap"></script>
+}
+

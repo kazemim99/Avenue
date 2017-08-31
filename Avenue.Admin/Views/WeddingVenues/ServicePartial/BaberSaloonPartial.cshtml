@@ -1,0 +1,108 @@
+﻿@model Avenue.DTO.WeddingVenuesDto
+
+
+<div class="row">
+    <fieldset class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "col-sm-2 control-label" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.Address, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+    </fieldset>
+
+
+    <fieldset class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tel, new { @class = "col-sm-2 control-label" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control integer", required = "required" })
+                @Html.ValidationMessageFor(model => model.Tel)
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MinCapacity, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.MinCapacity, new { @class = "form-control integer" })
+            @Html.ValidationMessageFor(model => model.MinCapacity)
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaxCapacity, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.MaxCapacity, new { @class = "form-control integer" })
+            @Html.ValidationMessageFor(model => model.MaxCapacity)
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="col-md-6 hidd">
+
+    <div class="form-group ">
+        <label class="control-label col-md-2">امکانات</label>
+        <div class="col-md-6 ">
+            <div class="tagadd">
+                @Html.DropDownListFor(model => model.FacilityId, ViewBag.FacilityId as IEnumerable<SelectListItem>, new { id = "FacilityId", @class = "form-control select2-1", @multiple = "multiple" })
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.WebSite, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.WebSite, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.WebSite)
+        </div>
+    </div>
+</fieldset>
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            <div class="col-md-5">
+                <div class="clearfix">
+                    <div class="checkbox c-checkbox pull-left mt0">
+                        <label class="switch">
+                            @Html.CheckBoxFor(model => model.Status, new { id = "mycheckbox" })
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="col-md-10">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, new { @class = "col-sm-2 control-label" })
+
+        <div class="">
+            @Html.TextAreaFor(model => model.Description, 10, 10, new { @class = "form-control note-editor", required = "required" })
+            @Html.ValidationMessageFor(model => model.Description)
+
+        </div>
+    </div>
+</fieldset>
+
+
+

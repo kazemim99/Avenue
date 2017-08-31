@@ -1,0 +1,218 @@
+﻿@model Avenue.DTO.WeddingVenuesDto
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StateId, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.DropDownListFor(x => x.StateId, (IEnumerable<SelectListItem>)ViewBag.States, "لطفا استان را انتخاب نمایید", new { @class = "form-control", id = "StateId", required = "required" })
+            @Html.ValidationMessageFor(model => model.StateId)
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityId, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.DropDownListFor(model => model.CityId, (IEnumerable<SelectListItem>)ViewBag.Cities, "انتخاب منطقه...", new { @class = "form-control", id = "CityId", required = "required" })
+            @Html.ValidationMessageFor(model => model.CityId)
+        </div>
+    </div>
+</fieldset>
+
+<div class="row">
+    <fieldset class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "col-sm-2 control-label" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.Address, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+    </fieldset>
+
+
+    <fieldset class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tel, new { @class = "col-sm-2 control-label" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control integer", required = "required" })
+                @Html.ValidationMessageFor(model => model.Tel)
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MinCapacity, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.MinCapacity, new { @class = "form-control integer" })
+            @Html.ValidationMessageFor(model => model.MinCapacity)
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaxCapacity, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.MaxCapacity, new { @class = "form-control integer" })
+            @Html.ValidationMessageFor(model => model.MaxCapacity)
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="col-md-6">
+
+    <div class="form-group ">
+        <label class="control-label col-md-2">امکانات</label>
+        <div class="col-md-6 ">
+            <div class="tagadd">
+                @Html.DropDownListFor(model => model.FacilityId, ViewBag.FacilityId as IEnumerable<SelectListItem>, new { id = "FacilityId", @class = "form-control select2-1", @multiple = "multiple" })
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+@section Styles {
+    @Styles.Render("~/bundles/fileUploadCss")
+    @Styles.Render("~/bundles/select2Css")
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/select2")
+
+    @Scripts.Render("~/bundles/jqueryValidate")
+    @Scripts.Render("~/bundles/filestyle")
+    @Scripts.Render("~/bundles/select2")
+    <script>
+            $.attributes = "@string.Join(",", Model.FacilityId)".split(',');
+            $.each($.attributes, function (intIndex, objValue) {
+                $('#FacilityId option[value=' + objValue + ']').attr('selected', true);
+            });
+
+
+    </script>
+
+    <script>
+
+            //Prevent Enter Letter
+            $(".integer")
+                .keypress(function (evt) {
+                    if (evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault();
+                    }
+                });
+
+            $("#StateId")
+                .change(function () {
+                    var id = $(this).val();
+                    $.ajax({
+                        url: "@Url.Action("CityList", "WeddingVenues")",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "post",
+                        success: function (data) {
+                            $('#CityId').get(0).options.length = 0;
+                            //$('#CityId').get(0).options[0] = new Option("Please Select One", "-1");
+                            $.each(data,
+                                function (index, item) {
+                                    $('#CityId').get(0).options[$('#CityId').get(0).options.length] = new
+                                        Option(item.Name, item.Id);
+                                });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                });
+            $("#CategoryId")
+                .on('change', function (e) {
+                    e.preventDefault();
+                    var id = $(this).val();
+                    debugger;
+                    $.ajax({
+                        url: "@Url.Action("AvneuTypeList", "WeddingVenues")",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "post",
+                        success: function (data) {
+                            $('#ServiceTypeId').get(0).options.length = 0;
+                            //$('#ServiceTypeId').get(0).options[0] = new Option("Please Select One", "-1");
+                            $.each(data,
+                                function (index, item) {
+                                    $('#ServiceTypeId').get(0).options[$('#ServiceTypeId').get(0).options.length] = new
+                                        Option(item.Name, item.Id);
+                                });
+                            $.ajax({
+                                url: "@Url.Action("Partial","WeddingVenues")",
+                                type: 'post',
+                                data: { id: id },
+                                dataType: 'html',
+                                success: function (result) {
+                                    alert("ss");
+                                    $("#partial").empty();
+                                    $(".hidd").css("display", "block");
+                                    $('#partial').html(result);
+                                }, error: function () {
+                                    alert("error");
+                                }
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                });
+
+            function myMap() {
+                var mapCanvas = document.getElementById("map");
+                var myCenter = new google.maps.LatLng("35.6892", "51.3890");
+                var mapOptions = { center: myCenter, zoom: 12 };
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+                var marker = new google.maps.Marker({ position: myCenter });
+                marker.setMap();
+
+                google.maps.event.addListener(map,
+                    'click',
+                    function (event) {
+                        placeMarker(map, event.latLng);
+                    });
+            }
+
+            function placeMarker(map, location) {
+                var marker = '';
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<br/> <p style="font-size:18;">   نام سرویس : </p> ' + $("#Name").val()
+                });
+                infowindow.open(map, marker);
+                $("#Lat").val(location.lat());
+                $("#Lng").val(location.lng());
+
+            }
+
+            @*$("#ImageTab").imageTab({
+            fileUploadId: "fileupload",
+            uploadUrl: "@Url.Action("UploadImage")",
+            tblFilesId: "tblProductImages",
+            uploadedFilesId: "productImagesData"
+        });*@
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5m9PNvVblmP9V8yx3PN9eAsEalGKVGFQ&callback=myMap"></script>
+}

@@ -1,0 +1,580 @@
+﻿::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #CF9C62;
+    /*outline: 1px solid slategrey;*/
+}
+
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+    margin-bottom: 15px !important;
+}
+
+.recipe-details .control-label {
+    text-align: right !important;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    cursor: pointer;
+    display: block !important;
+    width: 10px;
+    color: #333;
+    text-align: center;
+    position: relative;
+    left: -16px;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button {
+    background: #eee url('http://i.stack.imgur.com/YYySO.png') no-repeat 50% 50%;
+    width: 10px;
+    height: 15px;
+    padding: 9px;
+    position: relative;
+    left: -16px;
+    /*top:1px;*/
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.wizard > .content > .body {
+    position: relative !important;
+}
+
+.display-none {
+    display: none;
+}
+
+.ingred-group {
+    margin-top: 20px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.chef-tags ul li {
+    display: block !important;
+}
+
+.wizard > .content > .body ul.pagination {
+    display: block !important;
+    list-style: none !important;
+}
+
+.logo-text {
+    color: #fff;
+    margin-top: 10px;
+}
+
+    .logo-text img {
+        width: 50px;
+    }
+
+    .logo-text.large-logo {
+        margin-top: 5px;
+    }
+
+        .logo-text.large-logo img {
+            width: 100px;
+        }
+
+.tab-right .panel-body .nav-tabs {
+    border: none;
+}
+
+@media only screen and (min-width: 900px) {
+    .tab-right .nav-tabs > li {
+        float: none;
+    }
+
+    .tab-right .panel-body .nav-tabs {
+        float: right !important;
+        width: 15%;
+        border: none;
+    }
+}
+
+@media only screen and (max-width: 899px) {
+    .tab-right .nav-tabs > li {
+        margin-left: 3px;
+    }
+}
+
+.tab-right .nav-tabs > li a {
+    display: block;
+    width: auto;
+    margin: 0 0 0.5em;
+    padding: 1em 1em;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 0;
+    border: none;
+    font-weight: bold;
+    color: #515253;
+    background-color: #dbe1e2;
+}
+
+@media only screen and (max-width: 899px) {
+    .tab-right .nav-tabs > li a {
+        padding: 0.25em 1em;
+    }
+}
+
+.tab-right .nav-tabs > li.active > a {
+    background: #5d9cec;
+    color: #fff;
+}
+
+    .tab-right .nav-tabs > li.active > a, .tab-right .nav-tabs > li.active > a:hover, .tab-right .nav-tabs > li.active > a:focus {
+        background: #5d9cec;
+        color: #fff;
+    }
+
+        .tab-right .nav-tabs > li.active > a small {
+            color: #fff;
+        }
+
+.tab-right .tab-content {
+    float: left;
+    border: none;
+    width: 100%;
+}
+
+@media only screen and (min-width: 900px) {
+    .tab-right .tab-content {
+        width: 85%;
+    }
+}
+
+.next-tab {
+    margin-right: 30px;
+}
+
+.no-js #loader {
+    display: none;
+}
+
+.js #loader {
+    display: block;
+    position: absolute;
+    left: 100px;
+    top: 0;
+}
+/*/////////////////////loader spinner////////////////////*/
+.se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+    .se-pre-con .loader-demo {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: center no-repeat #fff;
+    }
+
+        .se-pre-con .loader-demo .ball-grid-pulse {
+            margin-top: 40vh;
+        }
+
+.tab-spinner {
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: /*url('../../Images/Preloader_3.gif')*/ center no-repeat /*#fff*/;
+}
+
+    .tab-spinner .loader-demo {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: center no-repeat rgba(255, 255, 255, 0.5);
+    }
+
+        .tab-spinner .loader-demo .ball-grid-pulse {
+            margin-top: 40vh;
+        }
+/*/////////////////////loader spinner////////////////////*/
+.content-wrapper h2 {
+    color: #c2272d;
+}
+
+.table-responsive td a {
+    cursor: pointer;
+}
+
+.panel .dataTables_wrapper {
+    overflow: hidden !important;
+}
+
+#myTab li:after {
+    content: '';
+    background: rgba(187, 187, 187, 0);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+}
+
+#myTab li.active:after {
+    z-index: -1;
+}
+
+#myTab li.active a:hover, #myTab li.active a {
+    border: none;
+}
+
+.upload-block {
+    height: 100px;
+    width: 130px;
+    padding-right: 15px;
+    padding-left: 15px;
+    -moz-box-shadow: 0px 0px 2px #808080;
+    -webkit-box-shadow: 0px 0px 2px #808080;
+    box-shadow: 0px 0px 2px #808080;
+}
+
+.up-box-back {
+    background-color: #f7f7f7;
+}
+
+.upload-container .panel-demo {
+    border: none !important;
+}
+
+.upload-container .widget {
+    margin: 0;
+}
+
+.upload-container a.Close-block {
+    position: absolute;
+    z-index: 2;
+    left: 25px;
+    top: 5px;
+    color: #c2272d;
+}
+
+.margin-37 {
+    margin-top: 32px;
+}
+
+audio {
+    width: 100%;
+}
+
+
+/* Style the Image Used to Trigger the Modal */
+.myImg, .myImg2 {
+    /*border-radius: 5px;*/
+    cursor: pointer;
+    transition: 0.3s;
+    height: 100px !important;
+}
+
+    .myImg:hover, .myImg2:hover {
+        opacity: 0.7;
+    }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.50); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content, .modal-content0 {
+    margin: auto;
+    display: block;
+    /*width: 80%;*/
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption, #caption0 {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption, .modal-content0, #caption0 {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* The Close Button */
+.file-ups .close {
+    position: absolute;
+    top: 75px;
+    left: 35px;
+    color: #c1272d !important;
+    text-shadow: none !important;
+    font-size: 40px !important;
+    font-weight: normal !important;
+    transition: 0.3s !important;
+    opacity: 1 !important;
+}
+
+    .file-ups.close:hover,
+    .file-ups.close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+.closeimg {
+    left: 35px !important;
+    right: auto;
+}
+
+.up-box-back video {
+    width: 100%;
+}
+
+.modal-content .bootstrap-filestyle {
+    max-width: 100% !important;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+#myProgress {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background-color: #ddd;
+}
+
+#myBar {
+    position: absolute;
+    width: 10%;
+    height: 100%;
+    background-color: #4CAF50;
+}
+
+#label {
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+td a:hover {
+    color: #c2272d;
+    text-decoration: none;
+}
+/*my modal close btn style*/
+#myModal .close, #myModal0 .close {
+    font-weight: normal;
+    color: #fff;
+    text-shadow: none;
+    opacity: 1;
+    position: absolute;
+    left: 50px;
+    font-size: 30px;
+}
+
+#progress p {
+    display: block;
+    width: 240px;
+    padding: 2px 5px;
+    margin: 2px 0;
+    border: 1px inset #446;
+    border-radius: 5px;
+}
+
+.chef-tags span.select2, .chef-tags span.select2-selection {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.chef-tags .btn {
+    padding: 5.5px 16px;
+}
+
+.plateDateSpan {
+    margin: 0 15px;
+}
+
+.plate-selection {
+    margin-top: 20px;
+}
+
+.navigation-menu {
+    margin-bottom: 15px;
+}
+
+    .navigation-menu span a {
+        color: #000;
+    }
+
+        .navigation-menu span a:hover {
+            color: #CF9C62;
+        }
+
+.no-padding {
+    padding: 0 !important;
+}
+.tbl-news {
+    background-position: 50% 0;
+    background-size: cover;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+/*=========================Sidenav Edit Panel==========================*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    /*padding-top: 60px;*/
+    outline: 1px solid #cfdbe2;
+}
+
+    .sidenav a {
+        /*padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;*/
+    }
+
+        .sidenav a:hover, .offcanvas a:focus {
+            color: #f1f1f1;
+            text-decoration: none;
+        }
+
+    .sidenav .closebtn {
+        position: relative;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: #818181;
+        transition: 0.3s;
+    }
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        /*padding-top: 15px;*/
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+.sidenav-overlay:after {
+    background: rgba(0,0,0,.6);
+    position: absolute;
+    left: 0;
+    -webkit-transition: all 1s ease;
+    transition: background-color .5s;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 9999;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+}
+
+.sidenav-header {
+    position: relative;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sidenav-footer {
+    position: relative;
+    bottom: 0;
+    padding: 10px 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+    width: 100%;
+}
+/*=========================Sidenav Edit Panel End==========================*/
+/*table {
+    width: 100%;
+}
+
+.first, .second {
+    width: 50px;
+}
+
+.third {
+    text-align: right;
+}*/

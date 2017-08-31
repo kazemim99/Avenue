@@ -1,0 +1,23 @@
+﻿
+
+@using (Html.BeginForm("UploadImage", "WeddingVenues", FormMethod.Post, new { enctype = "multipart/form-data", id = "fileupload" }))
+{
+    <fieldset class="col-md-6">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">تصاویر</label>
+            <div class="col-sm-10">
+                <input type="file" multiple="multiple" name="photos" id="photos" data-classbutton="btn btn-default" data-classinput="form-control inline" class="form-control filestyle" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="col-md-12">
+
+        <div class="form-group">
+            <div class="col-md-6">
+                <output id="list"></output>
+            </div>
+        </div>
+    </fieldset>
+}

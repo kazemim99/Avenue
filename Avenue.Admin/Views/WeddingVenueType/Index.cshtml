@@ -1,0 +1,130 @@
+﻿
+@model IEnumerable<Avenue.DTO.WeddingVenuesTypeDto>
+
+@{
+    ViewBag.Title = "لیست";
+}
+
+
+
+
+<h3>  لیست نوع سرویس
+</h3>
+    <div class="container-fluid">
+   <!-- START DATATABLE 1 -->
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <small>@Html.ActionLink("افزودن", "Create", null, new { @class = "mb-sm btn btn-primary"})</small>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                   <table id="datatable1" class="table table-striped table-hover">
+   <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnName)
+        </th>
+        <th></th>
+    </tr>
+	</thead>
+                            <tbody>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnName)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id=item.Id }, new { @class = "btn btn-white btn-sm"})
+            @Html.ActionLink("حذف", "Delete", new { id=item.Id }, new { @class = "btn btn-white btn-sm"})
+        </td>
+    </tr>
+}
+ </tbody>
+                   </table>
+                </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- END DATATABLE 1 -->
+
+
+</div>
+
+
+  <script type="text/javascript">
+    $().ready(function () {
+            debugger;
+            $(".field-validation-error").addClass("text-danger");
+            if ("@ViewBag.message" !== " ") {
+                if ("@ViewBag.style" === "success") {
+                    window.swal("@ViewBag.message", " ", "success");
+
+                } else {
+                    $.notify("@ViewBag.message", "@ViewBag.style");
+                }
+            }
+        })
+</script>
+
+
+@section Styles{
+    @Styles.Render("~/bundles/datatablesCss")
+    @Styles.Render("~/bundles/SweetAlertCss")
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/demoDatatable")
+    @Scripts.Render("~/bundles/SweetAlert")
+    <script src="~/Scripts/jquery-2.2.4.intellisense.js"></script>
+    <script>
+        $(document).on('click','.delete',function(e) {
+            var name = $(this).closest('tr').find("td:eq(0)").text();
+            var id = $(this).closest('tr').attr('id');
+            e.preventDefault();
+            debugger;
+            swal({
+                    title: "آیا برای حذف" + name + " مطمئن هستید؟",
+                    text: "این فایل دیگر قابل بازگشت نخواد بود!!!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "بله ، حذف شود",
+                    cancelButtonText: "خیر ، منصرف شدم!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        swal("حذف!", name + "با موفقیت حذف گردید", "success");
+                        $.ajax(
+                        {
+                            url: "/AvenueType/Delete/",
+                            data: { id: id },
+                            type: "Post",
+                            success: function(result) {
+                                $('tbody').html(result);
+                            }
+                        });
+                    } else {
+                        swal("انصراف", "عملیات حذف لغو گردید :) ", "error");
+                    }
+                });
+
+        });
+
+    </script>
+
+
+}

@@ -1,0 +1,334 @@
+﻿
+@model Avenue.DTO.WeddingVenuesDto
+
+@{
+    ViewBag.Title = "افزودن";
+}
+<style>
+    #close {
+        cursor: pointer;
+        padding: 3px;
+        border-radius: 126px;
+        position: absolute;
+        right: 1px;
+        bottom: 103px;
+        color: red;
+    }
+
+    .spans {
+        position: relative;
+    }
+
+    #list span {
+        position: relative;
+    }
+    .hidd {
+        display: none;
+    }
+</style>
+<div class="content-wrapper">
+    <h3>
+        افزودن سرویس جدید        <small>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <ol class="breadcrumb">
+                        <li>
+                            @Html.ActionLink("لیست", "Index")
+                        </li>
+                        <li class="active">
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-sm-8">
+                    <div class="title-action">
+                        @Html.ActionLink("بازگشت به لیست", "Index", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </small>
+    </h3>
+    <div class="panel panel-default">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+
+            <!-- Tab panes-->
+            <div class="tab-content">
+                <div id="home" role="tabpanel" class="tab-pane active">
+
+                    @using (Html.BeginForm("Create", "WeddingVenues", FormMethod.Post, new { enctype = "multipart/form-data", id = "fileupload", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.Lat, new { id = "Lat" })
+                        @Html.HiddenFor(x => x.Lng, new { id = "Lng" })
+                        @Html.HiddenFor(x => x.RowVersion)
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true)
+
+
+
+                            <div class="row">
+                                <fieldset class="col-md-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 control-label" })
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <fieldset class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">دسته بندی</label>
+
+                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(x => x.CategoryId, (IEnumerable<SelectListItem>)ViewBag.categoryParenId, "لطفا دسته را انتخاب نمایید", new { @class = "form-control", required = "required", id = "CategoryId" })
+                                        @Html.ValidationMessageFor(model => model.CategoryId)
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                            <fieldset class="col-md-6 hid">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">نوع سرویس</label>                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(x => x.CategoryId, (IEnumerable<SelectListItem>)ViewBag.ChildId, "لطفا دسته را انتخاب نمایید", new { @class = "form-control", id = "ServiceTypeId" })
+                                        @Html.ValidationMessageFor(x => x.CategoryId)
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="col-md-6 hidd">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.StateId, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(x => x.StateId, (IEnumerable<SelectListItem>)ViewBag.States, "لطفا استان را انتخاب نمایید", new { @class = "form-control", id = "StateId", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.StateId)
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="col-md-6 hidd">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CityId, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(model => model.CityId, (IEnumerable<SelectListItem>)ViewBag.Cities, "انتخاب منطقه...", new { @class = "form-control", id = "CityId", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.CityId)
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="col-md-6 hidd">
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-2">امکانات</label>
+                                    <div class="col-md-6 ">
+                                        <div class="tagadd">
+                                            @Html.DropDownListFor(model => model.FacilityId, ViewBag.FacilityId as IEnumerable<SelectListItem>, new { id = "FacilityId", @class = "form-control select2-1", @multiple = "multiple" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div id="partial">
+
+                            </div>
+
+
+
+                            @*<fieldset class="col-md-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Videos, new { @class = "col-sm-2 control-label" })
+                                        <div class="col-md-6">
+                                            <input type="file" name="Videos" data-classbutton="btn btn-default" data-classinput="form-control inline" class="form-control filestyle" />
+                                            @Html.ValidationMessageFor(model => model.Videos)
+                                        </div>
+                                    </div>
+                                </fieldset>*@
+                            @*<fieldset class="col-md-12">
+
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <output id="list"></output>
+                                        </div>
+                                    </div>
+                                </fieldset>*@
+
+
+                            <fieldset class="col-md-12 hidd">
+
+                                <div class="form-group">
+                                    موقعیت
+
+                                    <div class="col-md-12">
+                                        <div id="map" style="width: 100%; height: 500px;"></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="ذخیره" class="btn btn-primary start" />
+                                    @Html.ActionLink("انصراف", "Index", null, new { @class = "btn btn-white" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+    @section Styles {
+        @Styles.Render("~/bundles/fileUploadCss")
+        @Styles.Render("~/bundles/select2Css")
+
+
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/select2")
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+        @Scripts.Render("~/bundles/jqueryValidate")
+        @Scripts.Render("~/bundles/filestyle")
+        @Scripts.Render("~/bundles/select2")
+        <script>
+            $.attributes = "@string.Join(",", Model.FacilityId)".split(',');
+            $.each($.attributes, function (intIndex, objValue) {
+                $('#FacilityId option[value=' + objValue + ']').attr('selected', true);
+            });
+
+
+        </script>
+
+        <script>
+
+            //Prevent Enter Letter
+            $(".integer")
+                .keypress(function (evt) {
+                    if (evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault();
+                    }
+                });
+
+            $("#StateId")
+                .change(function () {
+                    var id = $(this).val();
+                    $.ajax({
+                        url: "@Url.Action("CityList", "WeddingVenues")",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "post",
+                        success: function (data) {
+                            $('#CityId').get(0).options.length = 0;
+                            //$('#CityId').get(0).options[0] = new Option("Please Select One", "-1");
+                            $.each(data,
+                                function (index, item) {
+                                    $('#CityId').get(0).options[$('#CityId').get(0).options.length] = new
+                                        Option(item.Name, item.Id);
+                                });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                });
+            $(".col-sm-2")
+                .live('click',
+                    function() {
+                        alert('خطای سیستمی');
+                    });
+
+            @*$("#CategoryId")
+                .on('change', function (e) {
+                    e.preventDefault();
+                    var id = $(this).val();
+                    debugger;
+                    $.ajax({
+                        url: "@Url.Action("AvneuTypeList", "WeddingVenues")",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "post",
+                        success: function (data) {
+                            $('#ServiceTypeId').get(0).options.length = 0;
+                            //$('#ServiceTypeId').get(0).options[0] = new Option("Please Select One", "-1");
+                            $.each(data,
+                                function (index, item) {
+                                    $('#ServiceTypeId').get(0).options[$('#ServiceTypeId').get(0).options.length] = new
+                                        Option(item.Name, item.Id);
+                                });
+                            $.ajax({
+                                url: "@Url.Action("Partial","WeddingVenues")",
+                                type: 'post',
+                                data: { id: id },
+                                dataType: 'html',
+                                success: function (result) {
+                                    alert("ss");
+                                    $("#partial").empty();
+                                    $(".hidd").css("display", "block");
+                                    $('#partial').html(result);
+                                }, error: function () {
+                                    alert("error");
+                                }
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                });*@
+
+            function myMap() {
+                var mapCanvas = document.getElementById("map");
+                var myCenter = new google.maps.LatLng("35.6892", "51.3890");
+                var mapOptions = { center: myCenter, zoom: 12 };
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+                var marker = new google.maps.Marker({ position: myCenter });
+                marker.setMap();
+
+                google.maps.event.addListener(map,
+                    'click',
+                    function (event) {
+                        placeMarker(map, event.latLng);
+                    });
+            }
+
+            function placeMarker(map, location) {
+                var marker = '';
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<br/> <p style="font-size:18;">   نام سرویس : </p> ' + $("#Name").val()
+                });
+                infowindow.open(map, marker);
+                $("#Lat").val(location.lat());
+                $("#Lng").val(location.lng());
+
+            }
+
+            @*$("#ImageTab").imageTab({
+            fileUploadId: "fileupload",
+            uploadUrl: "@Url.Action("UploadImage")",
+            tblFilesId: "tblProductImages",
+            uploadedFilesId: "productImagesData"
+        });*@
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5m9PNvVblmP9V8yx3PN9eAsEalGKVGFQ&callback=myMap"></script>
+    }

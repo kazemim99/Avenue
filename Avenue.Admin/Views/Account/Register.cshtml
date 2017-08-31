@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="block-center mt-xl wd-xl">
+    <!-- START panel-->
+    <div class="panel panel-dark panel-flat">
+        <div class="panel-heading text-center">
+            <a href="#">
+                <img src="~/Content/Images/logo.png" alt="Image" class="block-center img-rounded" />
+            </a>
+        </div>
+        <div class="panel-body">
+            <p class="text-center pv">ثبت نام جهت ثبت سرویس</p>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <br />
+                <h5 class="text-danger">
+                    @Html.ValidationSummary()
+                </h5>
+                <div class="form-group has-feedback">
+                    <label for="signupInputEmail1" class="text-muted">آدرس اایمیل</label>
+                    <input id="signupInputEmail1" name="email" type="email" placeholder="آدرس ایمیل" autocomplete="off" required="required" class="form-control" />
+                    <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="signupInputPassword1" class="text-muted">رمز عبور</label>
+                    <input id="signupInputPassword1" name="password" type="password" placeholder="رمز عبور" autocomplete="off" required="required" class="form-control" />
+                    <span class="fa fa-lock form-control-feedback text-muted"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="signupInputRePassword1" class="text-muted">تکرار رمز عبور</label>
+                    <input id="signupInputRePassword1" name="ConfirmPassword" type="password" placeholder="تکرار رمز عبور" autocomplete="off" required="required" data-parsley-equalto="#signupInputPassword1" class="form-control" />
+                    <span class="fa fa-lock form-control-feedback text-muted"></span>
+                </div>
+                <div class="clearfix">
+                    <div class="checkbox c-checkbox pull-left mt0">
+                        <label>
+                            <input type="checkbox" value="" required="required" name="agreed" />
+                            <span class="fa fa-check"></span>قبولی  <a href="#">قوانین و مقررات</a>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary mt-lg">ثبت نام</button>
+            }
+            <p class="pt-lg text-center">آیا قبلا ثبت نام کرده اید</p><a href="@Url.Action("Login", "Account")" class="btn btn-block btn-default">ورود</a>
+        </div>
+    </div>
+    <!-- END panel-->
+</div>

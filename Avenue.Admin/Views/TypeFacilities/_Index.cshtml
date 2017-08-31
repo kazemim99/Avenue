@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Avenue.DTO.TypeFacilitiesDTO>
+
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <tr id="@item.Id">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Icon)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }, new { @class = "btn btn-white btn-sm" })
+            @Html.ActionLink("حذف", "Delete", new { id = item.Id }, new { @class = "btn btn-white btn-sm delete" })
+        </td>
+    </tr>
+}
+

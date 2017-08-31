@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Unconfirmed Account";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    اگر هنوز ایمیل تایید را دریافت نکرده اید لطفا جهت ارسال دوباره ایمیل تایید
+    دوباره آن را وارد کرده و ارسال کنید.
+    با تشکر!
+</p>
+
+@using (Html.BeginForm("RegenerateEmailConfirmation", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Hidden("Email", (string)ViewBag.Email)
+    <input type="submit" value="ارسال مجدد ایمیل تایید" class="btn btn-primary" />
+}

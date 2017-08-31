@@ -1,0 +1,74 @@
+﻿@model Avenue.ViewModels.CategoryAvenuListVm
+
+@{
+    Layout = null;
+    var i = 0;
+    var j = 0;
+}
+<div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group render">
+    <div class="render">
+        @foreach (var item in Model.CategoryDtos)
+        {
+
+            <div class="panel panel-default">
+                @{ i++;}
+                <div id='heading"@i"' role="tab" class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href='#@i' aria-expanded="false" aria-controls="collapseOne" class="collapsed">@item.Name</a>
+                    </h4>
+                </div>
+                <div id='@i' role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0;">
+                    <div class="panel-body">
+
+                        @foreach (var item2 in Model.AvenueTypeDtos.Where(x => x.CategoryId == item.Id))
+                        {
+
+                            <div class="">
+                                @{j++;}
+                                <div id="headingTwo" role="tab" class="panel-heading row">
+
+                                    <h4 class="panel-title col-md-8">
+                                        <a data-toggle="collapse" data-parent="#" href='#@j-t' aria-expanded="true" aria-controls="collapseTwo" class=""> @item2.Name</a>
+                                    </h4>
+                                    <button id="@item2.Id" type="button" data-target="#myModal" class="btn btn-primary btn-xs co-md-4 icon-plus"></button>
+
+                                </div>
+                                <div id='@j-t' role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse collaps-@item2.Id" aria-expanded="true">
+                                    <div class="panel-body">
+                                        <div class="">
+                                            <div class="panel-body">
+                                                <table class="col-md-12 table table-hover table-stripped">
+                                                    @foreach (var item3 in Model.TypeFacilitiesDtos.Where(x=>x.AvenueTypeId == item2.Id))
+                                                    { 
+                                                        <tr class="col-md-3">
+                                                            <td class="col-md-9">
+                                                                <label>
+                                                                    <i class="fa fa-check-square"></i> <span class="text-primary">@item3.Name</span>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="col-md-6">
+                                                                <a href="#" id="facilityEdit" onclick="editFacility(@item3.Id)" class="btn btn-primary  btn-xs  fa fa-pencil-square-o"></a>
+                                                                <a href="#" onclick="deleted(@item3.Id,'@item3.Name',@item3.AvenueTypeId)" class="btn btn-danger  btn-xs  fa fa-trash-o delete"></a>
+                                                            </td>
+                                                        </tr>
+
+                                                    }
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                <hr />
+                                    }
+                    </div>
+                </div>
+            </div>
+                                    }
+    </div>
+</div>
+
+
+

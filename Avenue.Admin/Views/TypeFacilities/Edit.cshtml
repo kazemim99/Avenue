@@ -1,0 +1,123 @@
+﻿﻿
+
+@model Avenue.DTO.TypeFacilitiesDTO
+
+@{
+    ViewBag.Title = "ویرایش";
+}
+
+
+
+
+
+
+<div class="content-wrapper">
+   <h3>افزودن
+   <small> <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("لیست", "Index")
+            </li>
+            <li class="active">
+                <strong>افزودن</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("بازگشت به لیست", "Index", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div></small>
+</h3>
+<div class="panel panel-default">
+<div class="panel-heading"></div>
+<div class="panel-body">
+
+@using (Html.BeginForm("Edit", "TypeFacilities", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.Id)
+
+<fieldset class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name,new{@class="form-control"})
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+		</fieldset>
+
+
+        <fieldset class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AvenueTypeId, new {@class = "col-sm-2 control-label"})
+                <div class="col-md-6">
+                    @Html.DropDownList("AvenueId", null, "انتخاب نوع سرویس...", new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.AvenueTypeId)
+                </div>
+            </div>
+        </fieldset>
+
+
+        <fieldset class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Icon, new {@class = "col-sm-2 control-label"})
+                <div class="col-md-6">
+                    <input type="file" name="icon" class="form-control"/>
+                    @Html.ValidationMessageFor(model => model.Icon)
+                </div>
+            </div>
+        </fieldset>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
+				@Html.ActionLink("انصراف", "Index", null, new { @class = "btn btn-white"})
+            </div>
+        </div>
+        </div>
+
+
+}
+
+
+     </div>
+            </div>
+			</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/SweetAlertCss")
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/SweetAlert")
+
+<script type="text/javascript">
+    $()
+        .ready(function () {
+            if ("@ViewBag.message" !== " ") {
+                if ("@ViewBag.style" === "danger") {
+                    $.notify("@ViewBag.message", "@ViewBag.style");
+                }
+            }
+        })
+</script>
+}
+
+
